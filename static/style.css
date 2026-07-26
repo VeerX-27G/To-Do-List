@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&family=Work+Sans:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #E4DED0;
+  --paper: #FBF8F0;
+  --ink: #2B2A28;
+  --margin-red: #A8353A;
+  --line: #E1D9C4;
+  --accent-green: #4F7942;
+  --muted: #8A8372;
+  --tape: rgba(232, 217, 160, 0.75);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 64px 20px;
+  font-family: 'Work Sans', sans-serif;
+  color: var(--ink);
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(43,42,40,0.06) 1px, transparent 0);
+  background-size: 18px 18px;
+}
+
+.container {
+  position: relative;
+  width: 420px;
+  background: var(--paper);
+  padding: 40px 28px 28px 44px;
+  border-radius: 3px;
+  box-shadow:
+    0 1px 2px rgba(0,0,0,0.08),
+    0 12px 28px rgba(0,0,0,0.16);
+}
+
+/* Red margin rule, like a legal pad */
+.container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 26px;
+  width: 2px;
+  background: var(--margin-red);
+  opacity: 0.55;
+}
+
+/* Washi tape pinning the title to the page */
+h1 {
+  position: relative;
+  display: inline-block;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin: 0 0 28px 0;
+  padding: 0;
+  color: var(--ink);
+}
+
+h1::before {
+  content: "";
+  position: absolute;
+  top: -18px;
+  left: -10px;
+  width: 70px;
+  height: 22px;
+  background: var(--tape);
+  transform: rotate(-3deg);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+
+h1 span {
+  position: relative;
+}
+
+#todo-form {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+#title-input {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  background: #fff;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 14px;
+  color: var(--ink);
+}
+
+#title-input::placeholder {
+  color: var(--muted);
+}
+
+#title-input:focus {
+  outline: none;
+  border-color: var(--margin-red);
+  box-shadow: 0 0 0 3px rgba(168, 53, 58, 0.12);
+}
+
+/* Base button */
+button {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: transform 0.08s ease, opacity 0.15s ease;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+button:focus-visible {
+  outline: 2px solid var(--margin-red);
+  outline-offset: 2px;
+}
+
+#todo-form button {
+  padding: 0 18px;
+  background: var(--ink);
+  color: var(--paper);
+  text-transform: uppercase;
+}
+
+#todo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#todo-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 0;
+  border-bottom: 1px dashed var(--line);
+}
+
+#todo-list li:last-child {
+  border-bottom: none;
+}
+
+#todo-list li span {
+  font-size: 15px;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+#todo-list li.completed span {
+  color: var(--muted);
+  text-decoration: line-through;
+  text-decoration-color: var(--accent-green);
+  text-decoration-thickness: 2px;
+}
+
+.actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.actions button {
+  height: 30px;
+  padding: 0 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  color: var(--muted);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.actions .toggle-btn {
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+}
+
+.actions .toggle-btn:hover {
+  background: var(--accent-green);
+  color: var(--paper);
+}
+
+.actions button:last-child {
+  border-color: var(--margin-red);
+  color: var(--margin-red);
+}
+
+.actions button:last-child:hover {
+  background: var(--margin-red);
+  border-color: var(--margin-red);
+  color: var(--paper);
+}
+
+/* Empty state */
+#todo-list:empty::after {
+  content: "Nothing on the list yet — add your first task above.";
+  display: block;
+  padding: 20px 0;
+  color: var(--muted);
+  font-size: 13px;
+  font-style: italic;
+}
+
+@media (max-width: 480px) {
+  .container {
+    width: 100%;
+    padding: 36px 20px 24px 36px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
